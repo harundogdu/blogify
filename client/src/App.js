@@ -1,8 +1,12 @@
+import { Navbar, Main, Footer } from 'components/export';
+
 function App() {
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <div className='w-full min-h-screen flex flex-col bg-gray-100'>
+      <Navbar />
+      <Main />
+      <Footer />
+    </div>
   );
 }
 
