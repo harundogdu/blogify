@@ -2,7 +2,7 @@ import React from 'react'
 
 function Footer() {
     return (
-        <div className='flex justify-center items-center p-4 text-sm shadow-inner flex-shrink-0'>
+        <div className='flex justify-center items-center p-6 text-sm flex-shrink-0 bg-white'>
             created by Harun Doğdu | All Rights Reserved © {new Date().getFullYear()}
         </div>
     )

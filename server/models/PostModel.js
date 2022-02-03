@@ -3,6 +3,9 @@ const Schema = mongoose.Schema;
 const slugify = require('slugify');
 
 const PostSchema = new Schema({
+    image:{
+        type: String,
+    },
     title: {
         type: String,
         required: true,
@@ -16,7 +19,6 @@ const PostSchema = new Schema({
         required: true,
         trim: true,
         minlength: 3,
-        maxlength: 255,
     },
     slug: {
         type: String,
@@ -24,6 +26,11 @@ const PostSchema = new Schema({
         minlength: 3,
         maxlength: 255,
         unique: true
+    },
+    tag:{
+        type: String,
+        trim: true,
+        required: true,
     },
     date: {
         type: Date,

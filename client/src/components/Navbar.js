@@ -6,7 +6,7 @@ import { SiCoderwall } from 'react-icons/si'
 
 const Navbar = () => {
     return (
-        <div className="flex flex-shrink-0 justify-between items-center py-2 px-8 shadow-lg sticky top-0 bg-white mb-8">
+        <div className="flex flex-shrink-0 justify-between items-center py-2 px-8 shadow-lg sticky top-0 bg-white mb-8 outline-none">
             <a href='/' className='text-2xl font-bold'>Blogify</a>
             <Menu>
                 <MenuButton
