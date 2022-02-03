@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const methodOverride = require("method-override");
 const { connectToMongoDb } = require('./config/connect');
 
 /* define consts */
@@ -12,9 +13,12 @@ connectToMongoDb();
 /* define middlewares */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(methodOverride('_method', {
+    methods: ["POST", "GET"]
+}));
 
 /* define routes */
-app.use('/posts',require('./routes/PostRoute'));
+app.use('/posts', require('./routes/PostRoute'));
 
 /* start server */
 const PORT = process.env.SERVER_PORT || 3000;
