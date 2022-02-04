@@ -1,8 +1,12 @@
 import React from 'react'
 import Post from './Post'
 import { NotYetSharedPost } from './NotYetSharedPost'
+import Loading from './Loading'
 
-function PostList({ posts }) {
+function PostList({ posts, loading }) {
+    if (loading) {
+        return <Loading />
+    }
     return (
         <>
             {

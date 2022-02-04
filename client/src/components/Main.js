@@ -5,8 +5,7 @@ import PostList from './PostList';
 
 const Main = () => {
     const dispatch = useDispatch();
-    const { posts, error } = useSelector(state => state.posts);
-    console.error(error);
+    const { posts , isLoading } = useSelector(state => state.posts);
 
     React.useEffect(() => {
         dispatch(getAllPostsFromDB());
@@ -14,7 +13,7 @@ const Main = () => {
 
     return (
         <div className='min-w-full flex flex-1 h-full'>
-            <PostList posts={posts} />
+            <PostList posts={posts} loading={isLoading} />
         </div>
     );
 };
