@@ -8,7 +8,7 @@ module.exports.getPosts = (req, res) => {
             });
         }
         return res.status(200).json(posts);
-    })
+    }).sort({ date: -1 });
 }
 
 module.exports.getPost = async (req, res) => {
