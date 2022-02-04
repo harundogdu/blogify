@@ -1,15 +1,20 @@
 import React from 'react'
 import Post from './Post'
+import { NotYetSharedPost } from './NotYetSharedPost'
 
 function PostList({ posts }) {
     return (
-        <div className='grid grid-cols-4 py-4 px-8 gap-6'>
+        <>
             {
-                posts.map(post => (
-                    <Post key={post._id} post={post} />
-                ))
+                posts.length > 0 ?
+                    (
+                        <div className='grid grid-cols-4 py-4 px-8 gap-6'>
+                            {posts.map(post => <Post key={post.id} post={post} />)}
+                        </div>
+                    )
+                    : <NotYetSharedPost />
             }
-        </div>
+        </>
     )
 }
 
