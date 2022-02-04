@@ -13,7 +13,7 @@ function PostList({ posts, loading }) {
                 posts.length > 0 ?
                     (
                         <div className='grid grid-cols-4 py-4 px-8 gap-6'>
-                            {posts.map(post => <Post key={post.id} post={post} />)}
+                            {posts.map(post => <Post key={post._id} post={post} />)}
                         </div>
                     )
                     : <NotYetSharedPost />
