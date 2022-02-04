@@ -41,6 +41,7 @@ app.use(
         store: MongoStore.create({ mongoUrl: 'mongodb+srv://ancyradev:cZSID17kumRRhq2C@cluster0.uxbfc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' })
     })
 );
+
 app.use('*', (req, res, next) => {
     userIN = req.session.userID;
     next();

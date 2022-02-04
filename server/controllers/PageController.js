@@ -1,6 +1,12 @@
+const User = require('../models/UserModel');
 
-exports.getIndexPage = function (req, res) {
-    res.render('index');
+exports.getIndexPage = async function (req, res) {
+    const user = await User.findById(req.session.userID);
+    /*    res.render('index', { user }); */
+    res.status(200).json({
+        message: 'success',
+        user
+    });
 }
 
 exports.getLoginPage = function (req, res) {
