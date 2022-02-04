@@ -3,6 +3,9 @@ import Modal from 'react-modal';
 import { IoMdClose } from 'react-icons/io';
 
 const CustomModal = ({ modalIsOpen, setIsOpen, children, modalTitle }) => {
+    React.useEffect(() => {
+        Modal.setAppElement('#root');
+    }, []);
     const customStyles = {
         content: {
             top: '50%',
