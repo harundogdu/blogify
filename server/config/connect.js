@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 module.exports.connectToMongoDb = async function connectToDb() {
     try {
         await mongoose.
-            connect(`mongodb+srv://ancyradev:cZSID17kumRRhq2C@cluster0.uxbfc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
+            connect(`mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.uxbfc.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority`, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true,
                 useFindAndModify: false,
