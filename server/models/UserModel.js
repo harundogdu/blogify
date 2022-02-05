@@ -1,20 +1,27 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bcrypt = require('bcryptjs');
 
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 255,
     },
     email: {
         type: String,
         required: true,
         unique: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 255,
     },
     password: {
         type: String,
         required: true,
+        trim: true,
+        minlength: 3,
+        maxlength: 1024,
     },
     date: {
         type: Date,
@@ -22,10 +29,4 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', function (next) {
-    this.password = bcrypt.hashSync(this.password, 10);
-    next();
-})
-
-const User = mongoose.model('User', UserSchema);
-module.exports = User;
+module.exports = mongoose.model('User', UserSchema);

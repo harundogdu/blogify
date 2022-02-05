@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 const slugify = require('slugify');
 
-const PostSchema = new Schema({
-    image:{
+const PostSchema = new mongoose.Schema({
+    image: {
         type: String,
     },
     title: {
@@ -27,10 +26,13 @@ const PostSchema = new Schema({
         maxlength: 255,
         unique: true
     },
-    tag:{
+    tag: {
         type: String,
         trim: true,
         required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
     },
     date: {
         type: Date,
@@ -43,6 +45,4 @@ PostSchema.pre('save', function (next) {
     next();
 })
 
-const Post = mongoose.model('Post', PostSchema);
-
-module.exports = Post;
+module.exports = mongoose.model('Post', PostSchema);
