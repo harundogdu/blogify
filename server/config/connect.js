@@ -5,6 +5,9 @@ module.exports.connectToMongoDb = async function connectToDb() {
         await mongoose.
             connect(`mongodb+srv://ancyradev:cZSID17kumRRhq2C@cluster0.uxbfc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
                 useNewUrlParser: true,
+                useUnifiedTopology: true,
+                useFindAndModify: false,
+                useCreateIndex: true
             }).then(() => {
                 console.log('Connected to database');
             }).catch((err) => {
