@@ -22,7 +22,10 @@ module.exports.getPost = async (req, res) => {
 }
 
 module.exports.createPost = (req, res) => {
-    const newPost = new Post(req.body);
+    const newPost = new Post({
+        ...req.body,
+        author: req.userId
+    });
     newPost.save((err) => {
         if (err) {
             return res.status(500).json({

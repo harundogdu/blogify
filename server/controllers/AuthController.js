@@ -1,72 +1,102 @@
-const bcrypt = require('bcryptjs');
-const User = require('../models/UserModel');
+const express = require("express");
+const Joi = require("@hapi/joi");
+const bcrypt = require("bcryptjs");
+const User = require("../models/UserModel");
+const jwt = require("jsonwebtoken");
 
-exports.createUser = async (req, res) => {
-    try {
-        const { name, email, password, repassword } = req.body;
-        if (password !== repassword) {
-            res.status(400).redirect('/register');
-        } else {
-            const user = new User({
-                name,
-                email,
-                password
+const registerSchema = Joi.object({
+    name: Joi.string().required().min(3).max(255),
+    email: Joi.string().required().email().min(3).max(255),
+    password: Joi.string().required().min(6).max(255),
+});
+
+const loginSchema = Joi.object({
+    email: Joi.string().required().email().min(3).max(255),
+    password: Joi.string().required().min(6).max(255),
+});
+
+module.exports.registerUser = (req, res) => {
+    const { error } = registerSchema.validate(req.body);
+
+    if (error) {
+        res.status(400).send(error.details[0].message);
+        return;
+    }
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
+
+    const user = new User({
+        ...req.body,
+        password: hash,
+    });
+
+    user
+        .save()
+        .then((user) => {
+            const token = jwt.sign(
+                {
+                    _id: user._id,
+                },
+                process.env.JWT_SECRET
+            );
+            res.header("Authorization", token).json({
+                accessToken: token,
             });
-            await user.save();
-            res.status(200).redirect('/login');
+        })
+        .catch((err) => {
+            res.status(400).json({
+                status: 400,
+                message: err.message,
+            });
+        });
+};
+
+module.exports.loginUser = (req, res) => {
+    const { error } = loginSchema.validate(req.body);
+
+    if (error) {
+        res.status(400).json({
+            status: 400,
+            message: error.details[0].message,
+        });
+        return;
+    }
+
+    User.findOne({
+        email: req.body.email,
+    }).then((user) => {
+        if (!user) {
+            res.status(400).json({
+                status: 400,
+                message: "Invalid email or password",
+            });
         }
-    } catch (error) {
-        console.log(error);
-        res.status(400).redirect('/register');
-    }
-};
 
-exports.loginUser = async (req, res) => {
-    try {
-        const { email, password } = req.body;
+        const isValid = bcrypt.compareSync(req.body.password, user.password);
+        if (!isValid) {
+            res.status(400).json({
+                status: 400,
+                message: "Invalid email or password",
+            });
+        }
 
-        await User.findOne({ email }, (err, user) => {
-            if (user) {
-                bcrypt.compare(password, user.password, (err, same) => {
-                    if (same) {
-                        // USER SESSION
-                        req.session.userID = user._id;
-                        res.status(200).redirect('/');
-                    } else {
-                        res.status(400).redirect('/login');
-                    }
-                });
-            } else {
-                res.status(400).redirect('/login');
-            }
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+
+        res.header("Authorization", token).json({
+            accessToken: token,
         });
-    } catch (error) {
-        console.log(error);
+    }).catch((err) => {
         res.status(400).json({
-            status: 'fail',
-            error,
+            status: 400,
+            message: "Invalid email or password",
         });
-    }
+    });
 };
 
-exports.logoutUser = (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/');
-    })
+module.exports.logoutUser = (req, res) => {
+    res.header("Authorization", "").json({
+        accessToken: "",
+    });
+    return;
 }
-
-
-exports.deleteUser = async (req, res) => {
-    try {
-        await User.findByIdAndRemove(req.params.id)
-        await Course.deleteMany({ user: req.params.id })
-
-        res.status(200).redirect('/users/dashboard');
-
-    } catch (error) {
-        res.status(400).json({
-            status: 'fail',
-            error,
-        });
-    }
-};
