@@ -49,6 +49,7 @@ module.exports.registerUser = (req, res) => {
                 status: 400,
                 message: err.message,
             });
+            return;
         });
 };
 
@@ -71,6 +72,7 @@ module.exports.loginUser = (req, res) => {
                 status: 400,
                 message: "Invalid email or password",
             });
+            return;
         }
 
         const isValid = bcrypt.compareSync(req.body.password, user.password);
@@ -79,6 +81,7 @@ module.exports.loginUser = (req, res) => {
                 status: 400,
                 message: "Invalid email or password",
             });
+            return;
         }
 
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
@@ -91,6 +94,7 @@ module.exports.loginUser = (req, res) => {
             status: 400,
             message: "Invalid email or password",
         });
+        return;
     });
 };
 

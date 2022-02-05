@@ -54,7 +54,7 @@ app.use('*', (req, res, next) => {
 //app.use('/', PageRouter);
 
 app.use("/auth", AuthRouter);
-app.use('/posts', verifyToken, PostRouter);
+app.use('/posts', PostRouter);
 app.use('/', (req, res) => {
     res.send("Hi, welcome to my RESTFUL BlogAPI 😍");
 })
