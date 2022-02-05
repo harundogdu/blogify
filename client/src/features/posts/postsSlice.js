@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { postService } from "services/postService";
+import { postService } from "services/authService";
 
 export const getAllPostsFromDB = createAsyncThunk("posts/getAllPostsFromDB", async () => {
     const posts = await postService.get(`/posts`);

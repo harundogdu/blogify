@@ -1,9 +1,11 @@
-import React from 'react';
-import PostList from './PostList';
+import Error from 'components/Error';
+import Loading from 'components/Loading';
+import PostList from 'components/PostList';
+import React from 'react'
 import { useGetAllPostsQuery } from 'services/postsApi';
-import { Loading, Error } from 'components/export';
+import { ToastEmit, Toast } from 'utils/flashMessages';
 
-const Main = () => {
+function Home({ isAddPost }) {
     const { data, isFetching, error } = useGetAllPostsQuery();
 
     if (isFetching) {
@@ -14,11 +16,16 @@ const Main = () => {
         return <Error error={error} />;
     }
 
+    if (isAddPost) {
+        ToastEmit('success', 'Post added successfully!');
+    }
+
     return (
         <div className='min-w-full flex flex-1 h-full'>
+            {isAddPost && <Toast />}
             <PostList posts={data} loading={isFetching} />
         </div>
     );
-};
+}
 
-export default Main;
+export default Home
