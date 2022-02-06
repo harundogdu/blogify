@@ -12,7 +12,7 @@ module.exports.getPosts = (req, res) => {
 }
 
 module.exports.getPost = async (req, res) => {
-    const currentPost = await Post.findById(req.params.id);
+    const currentPost = await Post.findOne({ slug: req.params.slug });
     if (!currentPost) {
         return res.status(404).json({
             message: "Post not found"
