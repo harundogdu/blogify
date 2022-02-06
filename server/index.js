@@ -39,7 +39,6 @@ app.use(
         secret: 'mern-blogapp-secret', // session secret
         resave: false,
         saveUninitialized: true,
-        store: MongoStore.create({ mongoUrl: `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.uxbfc.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority` })
     })
 );
 
