@@ -1,24 +1,28 @@
 const Post = require("../models/PostModel");
+const User = require("../models/UserModel");
 
-module.exports.getPosts = (req, res) => {
-    Post.find({}, (err, posts) => {
-        if (err) {
-            return res.status(500).json({
-                error: err
-            });
-        }
-        return res.status(200).json(posts);
-    }).sort({ date: -1 });
+module.exports.getPosts = async (req, res) => {
+    const posts = await Post.find({}).sort({ date: -1 }).populate('author', 'name');
+    if (!posts) {
+        return res.status(404).json({
+            status: 404,
+            message: "No posts found",
+        });
+    }
+    return res.status(200).json({
+        status: 200,
+        posts
+    });
 }
 
 module.exports.getPost = async (req, res) => {
-    const currentPost = await Post.findOne({ slug: req.params.slug });
+    const currentPost = await Post.findOne({ slug: req.params.slug }).populate('author', 'name');
     if (!currentPost) {
         return res.status(404).json({
             message: "Post not found"
         });
     }
-    return res.status(200).json(currentPost);
+    return res.status(200).json({ posts: currentPost, });
 }
 
 module.exports.createPost = (req, res) => {
