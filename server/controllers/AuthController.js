@@ -99,8 +99,11 @@ module.exports.loginUser = (req, res) => {
 };
 
 module.exports.logoutUser = (req, res) => {
-    res.header("Authorization", "").json({
-        accessToken: "",
-    });
+    req.session.destroy(() => {
+        res.clearCookie("token");
+        res.status(200).json({
+            message: "Logged out successfully",
+        });
+    })
     return;
 }
