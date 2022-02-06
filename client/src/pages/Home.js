@@ -7,7 +7,6 @@ import { ToastEmit, Toast } from 'utils/flashMessages';
 
 function Home({ isAddPost, setIsAddPost }) {
     const { data, isFetching, error } = useGetAllPostsQuery();
-
     if (isFetching) {
         return <Loading />;
     }

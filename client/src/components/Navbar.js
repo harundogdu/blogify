@@ -5,13 +5,14 @@ import { HiOutlineLogout, HiOutlineLogin } from 'react-icons/hi'
 import { SiCoderwall } from 'react-icons/si'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
-import { logoutUser } from 'features/auth/authSlice';
+import { authLogoutUser, logoutUser } from 'features/auth/authSlice';
 
 function Navbar({ isOpen, setIsOpen }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { isAuthenticated } = useSelector(state => state.auth);
     const handleLogoutClick = () => {
+        dispatch(authLogoutUser())
         dispatch(logoutUser())
         navigate('/');
     };

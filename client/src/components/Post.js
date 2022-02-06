@@ -22,7 +22,7 @@ function Post({ post }) {
                     <p className='flex-1 text-sm text-gray-600 group-hover:text-white'>{post.content.substring(0, 255)}</p>
                 </div>
                 <div className='flex items-center justify-between'>
-                    <p className='font-bold'>Harun Doğdu</p>
+                    <p className='font-bold'>{post.author.name}</p>
                     <p className='text-xs text-gray-400 group-hover:text-white'>
                         {moment(post.date).fromNow()}
                     </p>

@@ -23,20 +23,20 @@ function PostDetail() {
         <div className='flex-1 flex px-8 flex-col'>
             <div className='w-full h-[400px] rounded'>
                 <img
-                    className='w-full h-full object-cover rounded'
+                    className='w-full h-full rounded object-cover'
                     src={data?.image || DefaultImage}
                     alt={data?.title} />
             </div>
-            <div className='grid grid-cols-7 gap-4 my-4'>
+            <div className='flex flex-col lg:grid grid-cols-7 gap-4 my-4'>
                 <div className="col-span-6">
-                    <h1 className='text-4xl font-semibold'>{data?.title}</h1>
-                    <p className='text-xl text-gray-600 my-4 text-justify'>{data?.content}</p>
+                    <h1 className='text-3xl font-semibold'>{data?.title}</h1>
+                    <p className='text-lg text-gray-600 my-4'>{data?.content}</p>
                 </div>
                 <div className='flex flex-col space-y-2 my-4'>
                     <div className='flex flex-col space-y-8'>
                         <div className='flex items-center justify-between'>
                             <AiOutlineUser className='text-gray-600' />
-                            <p className='font-bold' title='Post Author'>Harun Doğdu</p>
+                            <p className='font-bold' title='Post Author'>{data?.author?.name}</p>
                         </div>
                         <div className='flex items-center justify-between'>
                             <AiOutlineTag className='text-gray-600' />

@@ -6,28 +6,16 @@ const CustomModal = ({ modalIsOpen, setIsOpen, children, modalTitle }) => {
     React.useEffect(() => {
         Modal.setAppElement('#root');
     }, []);
-    const customStyles = {
-        content: {
-            top: '50%',
-            left: '50%',
-            right: 'auto',
-            bottom: 'auto',
-            marginRight: '-50%',
-            transform: 'translate(-50%, -50%)',
-            width: "600px",
-            padding: "60px 40px",
-            borderRadius: "10px",
-        },
-    };
+
     function closeModal() {
         setIsOpen(false);
     }
     return (
-        <div className='w-full h-full flex items-center justify-center bg-red-600'>
+        <div className='flex items-center justify-center w-full h-full'>
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
-                style={customStyles}
+                className="w-11/12 h-3/4 md:h-fit md:w-1/2 rounded-lg bg-white px-6 py-8 shadow-lg absolute outline-none top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
                 <div className='flex justify-between items-center my-4'>
                     <h2 className='text-lg'>{modalTitle}</h2>

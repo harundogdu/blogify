@@ -6,6 +6,12 @@ export const authLoginUser = createAsyncThunk("auth/loginUser", async (payload, 
     return response;
 })
 
+export const authLogoutUser = createAsyncThunk("auth/logoutUser", async () => {
+    const response = await authService.get(`/auth/logout`);
+    return response;
+})
+
+
 const initialState = {
     isAuthenticated: false,
     token: null,
@@ -30,6 +36,7 @@ const authSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        /* authLoginUser */
         builder.addCase(authLoginUser.pending, (state, action) => {
             state.isLoading = true;
             state.isAuthenticated = false;
@@ -44,6 +51,24 @@ const authSlice = createSlice({
             }
         });
         builder.addCase(authLoginUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isAuthenticated = false;
+            state.token = null;
+            state.error = action.error.message;
+        });
+        /* authLogoutUser */
+        builder.addCase(authLogoutUser.pending, (state, action) => {
+            state.isLoading = true;
+            state.isAuthenticated = false;
+            state.error = null;
+        });
+        builder.addCase(authLogoutUser.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isAuthenticated = false;
+            state.token = null;
+            state.error = null;
+        });
+        builder.addCase(authLogoutUser.rejected, (state, action) => {
             state.isLoading = false;
             state.isAuthenticated = false;
             state.token = null;
