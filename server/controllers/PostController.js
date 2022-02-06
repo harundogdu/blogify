@@ -9,10 +9,7 @@ module.exports.getPosts = async (req, res) => {
             message: "No posts found",
         });
     }
-    return res.status(200).json({
-        status: 200,
-        posts
-    });
+    return res.status(200).json(posts);
 }
 
 module.exports.getPost = async (req, res) => {
@@ -22,7 +19,7 @@ module.exports.getPost = async (req, res) => {
             message: "Post not found"
         });
     }
-    return res.status(200).json({ posts: currentPost, });
+    return res.status(200).json(currentPost);
 }
 
 module.exports.createPost = (req, res) => {
