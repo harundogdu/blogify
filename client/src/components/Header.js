@@ -8,7 +8,7 @@ import {
     Stack,
     Button,
 } from "@chakra-ui/react";
-import { CustomModal } from "components/export";
+import { CustomModal } from "components";
 import { MdTitle } from "react-icons/md";
 import { BiImage } from "react-icons/bi";
 import { useForm } from "react-hook-form";

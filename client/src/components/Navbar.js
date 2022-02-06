@@ -17,14 +17,14 @@ function Navbar({ isOpen, setIsOpen }) {
     };
 
     React.useEffect(() => {
-        if(!isAuthenticated){
-            
+        if (!isAuthenticated) {
+
         }
-    },[isAuthenticated])
+    }, [isAuthenticated])
 
     return (
         <>
-            <a href='/' className='text-2xl font-bold'>Blogify</a>
+            <Link to='/' className='text-2xl font-bold'>Blogify </Link>
             <Menu>
                 <MenuButton
                     as={IconButton}

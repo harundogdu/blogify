@@ -5,7 +5,7 @@ import React from 'react'
 import { useGetAllPostsQuery } from 'services/postsApi';
 import { ToastEmit, Toast } from 'utils/flashMessages';
 
-function Home({ isAddPost }) {
+function Home({ isAddPost, setIsAddPost }) {
     const { data, isFetching, error } = useGetAllPostsQuery();
 
     if (isFetching) {
@@ -18,6 +18,9 @@ function Home({ isAddPost }) {
 
     if (isAddPost) {
         ToastEmit('success', 'Post added successfully!');
+        setTimeout(() => {
+            setIsAddPost(false);
+        }, 4000);
     }
 
     return (

@@ -37,9 +37,11 @@ const authSlice = createSlice({
         });
         builder.addCase(authLoginUser.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.isAuthenticated = true;
             const token = action.payload.data.accessToken;
-            localStorage.setItem("token", token);
+            if (token) {
+                state.isAuthenticated = true;
+                localStorage.setItem("token", token);
+            }
         });
         builder.addCase(authLoginUser.rejected, (state, action) => {
             state.isLoading = false;

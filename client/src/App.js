@@ -1,9 +1,8 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { Header, Footer } from 'components/export';
-import Login from "pages/Login";
-import Home from "pages/Home";
 import { useDispatch } from "react-redux";
+import { Routes, Route } from "react-router-dom";
+import { Home, PostDetail, Login } from 'pages'
+import { Header, Footer } from 'components';
 import { loginUserSuccess } from "features/auth/authSlice";
 
 function App() {
@@ -20,8 +19,9 @@ function App() {
       <Header setIsAddPost={setIsAddPost} />
 
       <Routes>
-        <Route path="/" element={<Home isAddPost={isAddPost} />} />
+        <Route path="/" element={<Home isAddPost={isAddPost} setIsAddPost={setIsAddPost} />} />
         <Route path="/login" element={<Login />} />
+        <Route path="posts/:slug" element={<PostDetail />} />
       </Routes>
 
       <Footer />
