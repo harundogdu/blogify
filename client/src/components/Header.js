@@ -33,7 +33,7 @@ const Header = ({setIsAddPost}) => {
     };
     return (
         <>
-            <div className="flex flex-shrink-0 justify-between items-center py-2 px-8 shadow-lg sticky top-0 bg-white mb-8 outline-none">
+            <div className="flex flex-shrink-0 justify-between items-center py-2 px-8 shadow-lg sticky top-0 z-50 bg-white mb-8 outline-none">
                 <Navbar setIsOpen={setIsOpen} isOpen={isOpen} />
             </div>
             <CustomModal

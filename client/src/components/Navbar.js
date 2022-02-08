@@ -2,6 +2,7 @@ import React from 'react'
 import { AddIcon, HamburgerIcon } from '@chakra-ui/icons';
 import { IconButton, Menu, MenuButton, MenuDivider, MenuItem, MenuList } from '@chakra-ui/react';
 import { HiOutlineLogout, HiOutlineLogin } from 'react-icons/hi'
+import { GrAppsRounded } from 'react-icons/gr'
 import { SiCoderwall } from 'react-icons/si'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from "react-router-dom";
@@ -45,6 +46,11 @@ function Navbar({ isOpen, setIsOpen }) {
                                 <MenuItem onClick={() => setIsOpen(true)} icon={<AddIcon />}>
                                     New Post
                                 </MenuItem>
+                                <Link to='/operation'>
+                                    <MenuItem icon={<GrAppsRounded />}>
+                                        Operations
+                                    </MenuItem>
+                                </Link>
                                 <MenuDivider />
                                 <MenuItem icon={<HiOutlineLogout />} onClick={handleLogoutClick}>
                                     Logout
