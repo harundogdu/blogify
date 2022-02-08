@@ -1,12 +1,23 @@
 import Error from 'components/Error';
 import Loading from 'components/Loading';
 import PostList from 'components/PostList';
-import React from 'react'
+import React, { useEffect } from 'react';
 import { useGetAllPostsQuery } from 'services/postsApi';
 import { ToastEmit, Toast } from 'utils/flashMessages';
 
 function Home({ isAddPost, setIsAddPost }) {
     const { data, isFetching, error } = useGetAllPostsQuery();
+    const [posts, setPosts] = React.useState([]);
+
+    useEffect(() => {
+        if (data) {
+            setPosts(data);
+        }
+        return () => {
+            setPosts([]);
+        }
+    }, [data])
+
     if (isFetching) {
         return <Loading />;
     }
@@ -22,10 +33,11 @@ function Home({ isAddPost, setIsAddPost }) {
         }, 4000);
     }
 
+
     return (
         <div className='min-w-full flex flex-1 h-full'>
             {isAddPost && <Toast />}
-            <PostList posts={data} loading={isFetching} />
+            <PostList posts={posts} loading={isFetching} />
         </div>
     );
 }
