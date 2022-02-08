@@ -28,7 +28,9 @@ connectToMongoDb();
 app.use(express.static('public'));
 
 /* define middlewares */
-app.use(cors());
+app.use(cors({
+    origin: '*',
+}));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(methodOverride('_method', {
