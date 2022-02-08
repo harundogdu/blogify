@@ -42,8 +42,8 @@ function Login() {
         <>
             <Toast />
 
-            <div className="flex-1 px-8 flex justify-center items-center flex-col">
-                <div className="w-[500px] bg-white p-6 rounded-lg">
+            <div className=" flex-1 px-8 flex justify-center items-center flex-col">
+                <div className="md:w-[500px] bg-white p-6 rounded-lg">
                     <h1 className="text-2xl font-bold mb-4">Blogify Login</h1>
                     <form onSubmit={handleSubmit(onSubmit)} method="post">
                         <input type="hidden" name="_method" value="PUT" />
