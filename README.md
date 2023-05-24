@@ -7,7 +7,7 @@ Bu proje Nodejs, Mongo DB, Express Js, [Create React App](https://github.com/fac
 İlk olarak aşağıdaki komutu kopyalanız. Ardından terminal ekranını açarak, projenin kurulmasını istediğiniz bir alana gelerek yapıştırıp çalıştırınız.
 
 ```
-git clone https://github.com/harundogdu/blogapp.git
+git clone https://github.com/harundogdu/blogify.git
 ```
 
 <br />
